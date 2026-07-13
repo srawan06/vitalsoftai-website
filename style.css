@@ -1,0 +1,249 @@
+/* ======================================================
+   VitalSoftAI — Design Tokens
+   Concept: the vital-sign waveform as structural signature.
+   Health research produces signal — this site reads like one.
+   ====================================================== */
+
+:root{
+  /* Color */
+  --paper:      #EEF2EE;
+  --paper-alt:  #E3EAE4;
+  --panel:      #FBFCFA;
+  --ink:        #12211D;
+  --ink-soft:   #4C5D56;
+  --ink-faint:  #83938B;
+  --teal:       #0B4F4A;
+  --teal-deep:  #072F2C;
+  --teal-bright:#12746C;
+  --coral:      #E15B3F;
+  --coral-deep: #C4462D;
+  --gold:       #C98A2E;
+  --line:       #C7D1C9;
+  --line-dark:  #2B4842;
+
+  /* Type */
+  --f-display: 'Fraunces', serif;
+  --f-body:    'IBM Plex Sans', sans-serif;
+  --f-mono:    'IBM Plex Mono', monospace;
+
+  /* Layout */
+  --maxw: 1180px;
+  --pad: clamp(20px, 5vw, 64px);
+}
+
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--f-body);
+  font-size:16px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+
+img,svg{ display:block; max-width:100%; }
+a{ color:inherit; }
+
+h1,h2,h3,h4{
+  font-family:var(--f-display);
+  color:var(--ink);
+  margin:0 0 0.4em;
+  font-weight:600;
+  letter-spacing:-0.01em;
+}
+
+p{ margin:0 0 1em; color:var(--ink-soft); }
+
+.wrap{
+  max-width:var(--maxw);
+  margin:0 auto;
+  padding-left:var(--pad);
+  padding-right:var(--pad);
+}
+
+.eyebrow{
+  font-family:var(--f-mono);
+  font-size:12.5px;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--coral-deep);
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:16px;
+}
+.eyebrow::before{
+  content:"";
+  width:20px; height:1px;
+  background:var(--coral-deep);
+  display:inline-block;
+}
+
+/* focus visibility */
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
+  outline:2px solid var(--teal-bright);
+  outline-offset:3px;
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
+}
+
+/* ---------------- Nav ---------------- */
+.site-nav{
+  position:sticky; top:0; z-index:50;
+  background:rgba(238,242,238,0.88);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+}
+.site-nav .wrap{
+  display:flex; align-items:center; justify-content:space-between;
+  padding-top:18px; padding-bottom:18px;
+}
+.brand{
+  display:flex; align-items:center; gap:10px;
+  font-family:var(--f-display);
+  font-weight:600; font-size:19px;
+  text-decoration:none; color:var(--ink);
+}
+.brand .pulse-mark{ width:26px; height:16px; }
+.brand .pulse-mark path{
+  fill:none; stroke:var(--coral); stroke-width:2;
+  stroke-linecap:round; stroke-linejoin:round;
+}
+.nav-links{
+  display:flex; align-items:center; gap:34px;
+  list-style:none; margin:0; padding:0;
+}
+.nav-links a{
+  text-decoration:none; font-size:14.5px; color:var(--ink-soft);
+  font-weight:500; transition:color .15s ease;
+}
+.nav-links a:hover, .nav-links a.active{ color:var(--teal); }
+.nav-links a.active{ color:var(--ink); font-weight:600; }
+.nav-cta{
+  background:var(--ink); color:var(--panel) !important;
+  padding:9px 18px; border-radius:3px; font-size:14px !important;
+  font-weight:600 !important;
+}
+.nav-cta:hover{ background:var(--teal); color:var(--panel) !important; }
+.nav-toggle{ display:none; }
+
+@media (max-width:820px){
+  .nav-links{
+    position:fixed; inset:64px 0 auto 0; background:var(--panel);
+    flex-direction:column; align-items:flex-start; gap:0;
+    border-bottom:1px solid var(--line);
+    transform:translateY(-8px); opacity:0; pointer-events:none;
+    transition:opacity .18s ease, transform .18s ease;
+  }
+  .nav-links.open{ transform:translateY(0); opacity:1; pointer-events:auto; }
+  .nav-links li{ width:100%; border-top:1px solid var(--line); }
+  .nav-links a{ display:block; padding:16px var(--pad); }
+  .nav-toggle{
+    display:block; background:none; border:none; cursor:pointer;
+    width:32px; height:24px; position:relative;
+  }
+  .nav-toggle span{
+    position:absolute; left:0; right:0; height:2px; background:var(--ink);
+    transition:transform .2s ease, opacity .2s ease;
+  }
+  .nav-toggle span:nth-child(1){ top:2px; }
+  .nav-toggle span:nth-child(2){ top:11px; }
+  .nav-toggle span:nth-child(3){ top:20px; }
+  .nav-toggle.open span:nth-child(1){ transform:translateY(9px) rotate(45deg); }
+  .nav-toggle.open span:nth-child(2){ opacity:0; }
+  .nav-toggle.open span:nth-child(3){ transform:translateY(-9px) rotate(-45deg); }
+}
+
+/* ---------------- Waveform divider (signature element) ---------------- */
+.trace{
+  width:100%; height:64px; display:block;
+  overflow:visible;
+}
+.trace path{
+  fill:none; stroke:var(--line-dark); stroke-width:1.4;
+  opacity:0.55;
+}
+.trace.on-dark path{ stroke:rgba(255,255,255,0.28); }
+.trace .draw{
+  stroke:var(--coral); stroke-width:2;
+  stroke-dasharray:900; stroke-dashoffset:900;
+  animation:draw 2.6s ease forwards 0.2s;
+}
+@keyframes draw{ to{ stroke-dashoffset:0; } }
+
+/* ---------------- Buttons ---------------- */
+.btn{
+  display:inline-flex; align-items:center; gap:8px;
+  font-family:var(--f-body); font-weight:600; font-size:14.5px;
+  padding:13px 24px; border-radius:3px; text-decoration:none;
+  border:1px solid transparent; cursor:pointer; transition:all .15s ease;
+}
+.btn-primary{ background:var(--teal); color:#fff; }
+.btn-primary:hover{ background:var(--teal-deep); }
+.btn-ghost{ background:transparent; color:var(--ink); border-color:var(--line-dark); }
+.btn-ghost:hover{ border-color:var(--ink); }
+.btn-on-dark.btn-ghost{ color:#fff; border-color:rgba(255,255,255,0.4); }
+.btn-on-dark.btn-ghost:hover{ border-color:#fff; }
+
+/* ---------------- Sections generic ---------------- */
+section{ padding:88px 0; }
+.section-tight{ padding:56px 0; }
+.dark{ background:var(--teal-deep); color:#fff; }
+.dark p{ color:rgba(255,255,255,0.72); }
+.dark h1,.dark h2,.dark h3{ color:#fff; }
+.dark .eyebrow{ color:var(--gold); }
+.dark .eyebrow::before{ background:var(--gold); }
+
+.panel-bg{ background:var(--panel); }
+.alt-bg{ background:var(--paper-alt); }
+
+/* ---------------- Reveal on scroll ---------------- */
+.reveal{ opacity:0; transform:translateY(14px); transition:opacity .5s ease, transform .5s ease; }
+.reveal.in{ opacity:1; transform:translateY(0); }
+
+/* ---------------- Footer ---------------- */
+footer{
+  background:var(--teal-deep); color:rgba(255,255,255,0.75);
+  padding:56px 0 28px;
+}
+footer .foot-grid{
+  display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:32px;
+  margin-bottom:40px;
+}
+footer h4{ color:#fff; font-family:var(--f-mono); font-size:12.5px; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:14px; font-weight:600;}
+footer ul{ list-style:none; margin:0; padding:0; }
+footer li{ margin-bottom:9px; }
+footer a{ text-decoration:none; color:rgba(255,255,255,0.7); font-size:14px; }
+footer a:hover{ color:#fff; }
+footer .brand{ color:#fff; }
+footer .foot-bottom{
+  border-top:1px solid rgba(255,255,255,0.15); padding-top:22px;
+  display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+  font-size:12.5px; font-family:var(--f-mono); color:rgba(255,255,255,0.5);
+}
+@media (max-width:760px){
+  footer .foot-grid{ grid-template-columns:1fr 1fr; }
+}
+
+/* ---------------- Responsive overrides for inline grids ---------------- */
+@media (max-width:900px){
+  section .wrap > div[style*="grid-template-columns:1fr 1fr"],
+  section .wrap > div[style*="grid-template-columns:1.15fr 1fr"],
+  section .wrap > div[style*="grid-template-columns:1fr 1.15fr"],
+  section .wrap > div[style*="grid-template-columns:1.3fr 1fr"],
+  section .wrap > div[style*="grid-template-columns:repeat(4,1fr)"],
+  section .wrap > div[style*="grid-template-columns:repeat(3,1fr)"],
+  section .wrap > div[style*="grid-template-columns:repeat(2,1fr)"]{
+    grid-template-columns:1fr !important;
+  }
+  section .wrap > div[style*="order:2"]{ order:1 !important; }
+  section .wrap > div[style*="order:1"]{ order:2 !important; }
+}
+@media (max-width:620px){
+  h1{ font-size:clamp(30px,9vw,40px) !important; }
+}

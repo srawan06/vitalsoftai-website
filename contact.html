@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — VitalSoftAI</title>
+<meta name="description" content="Book a walkthrough with VitalSoftAI or reach the team directly.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .form-field{ margin-bottom:20px; }
+  .form-field label{
+    display:block; font-family:var(--f-mono); font-size:12.5px;
+    letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-soft);
+    margin-bottom:8px;
+  }
+  .form-field input, .form-field textarea, .form-field select{
+    width:100%; font-family:var(--f-body); font-size:15px; color:var(--ink);
+    background:var(--panel); border:1px solid var(--line-dark); border-radius:3px;
+    padding:12px 14px; resize:vertical;
+  }
+  .form-field textarea{ min-height:120px; }
+  #form-status{
+    display:none; margin-top:16px; padding:12px 16px; border-radius:3px;
+    background:rgba(11,79,74,0.1); color:var(--teal-deep); font-size:14px;
+  }
+  #form-status.visible{ display:block; }
+  .contact-card{
+    background:var(--panel); border:1px solid var(--line); border-radius:4px;
+    padding:26px; margin-bottom:18px;
+  }
+  .contact-card h4{
+    font-family:var(--f-mono); font-size:12px; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--coral-deep); margin-bottom:8px; font-weight:600;
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="wrap">
+    <a href="index.html" class="brand">
+      <svg class="pulse-mark" viewBox="0 0 26 16"><path d="M0 8 H7 L10 1 L14 15 L17 8 H26"/></svg>
+      VitalSoft<span style="color:var(--coral)">AI</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+      <li><a href="contact.html" class="nav-cta">Talk to us</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap" style="padding-top:60px;">
+    <p class="eyebrow">Contact</p>
+    <h1 style="font-size:clamp(34px,5vw,54px); max-width:18ch; line-height:1.08;">
+      Let's map your data to the platform.
+    </h1>
+    <p style="font-size:17.5px; max-width:52ch; margin-top:18px;">
+      Tell us about your study or systems below, or reach us directly — we
+      typically reply within one business day.
+    </p>
+  </div>
+  <svg class="trace" viewBox="0 0 1180 64" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 32 H600 L616 12 L636 52 L654 32 H1180" />
+    <path class="draw" d="M0 32 H600 L616 12 L636 52 L654 32 H1180" />
+  </svg>
+</header>
+
+<section class="panel-bg" style="padding-top:0;">
+  <div class="wrap" style="display:grid; grid-template-columns:1.3fr 1fr; gap:56px;">
+
+    <form id="contact-form">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+        <div class="form-field">
+          <label for="name">Full name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-field">
+          <label for="org">Organization</label>
+          <input type="text" id="org" name="org" required>
+        </div>
+      </div>
+      <div class="form-field">
+        <label for="email">Work email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-field">
+        <label for="interest">What are you looking into?</label>
+        <select id="interest" name="interest">
+          <option>Clinical data platform</option>
+          <option>Research analytics &amp; AI</option>
+          <option>EHR / systems integration</option>
+          <option>Compliance &amp; governance</option>
+          <option>Not sure yet</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label for="message">Tell us about your study or systems</label>
+        <textarea id="message" name="message" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Send message</button>
+      <div id="form-status" role="status"></div>
+    </form>
+
+    <div>
+      <div class="contact-card">
+        <h4>Email</h4>
+        <a href="mailto:hello@vitalsoftai.ca" style="font-size:16px;">hello@vitalsoftai.ca</a>
+      </div>
+      <div class="contact-card">
+        <h4>Response time</h4>
+        <p style="margin:0; font-size:15px;">One business day, typically faster during
+        the work week.</p>
+      </div>
+      <div class="contact-card">
+        <h4>Head office</h4>
+        <p style="margin:0; font-size:15px;">Toronto, Ontario, Canada<br>Remote-first across Canada</p>
+      </div>
+      <div class="contact-card" style="margin-bottom:0;">
+        <h4>Enterprise &amp; procurement</h4>
+        <p style="margin:0; font-size:15px;">Security documentation and vendor
+        questionnaires available on request.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="index.html" class="brand" style="margin-bottom:14px; display:flex;">
+          <svg class="pulse-mark" viewBox="0 0 26 16"><path d="M0 8 H7 L10 1 L14 15 L17 8 H26" stroke="rgba(255,255,255,0.75)"/></svg>
+          VitalSoftAI
+        </a>
+        <p style="font-size:13.5px; max-width:32ch;">Software and AI systems for health research teams. Built in Canada, aligned to PIPEDA and PHIPA.</p>
+      </div>
+      <div>
+        <h4>Site</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html">Data platform</a></li>
+          <li><a href="services.html">Analytics &amp; AI</a></li>
+          <li><a href="services.html">Integrations</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:hello@vitalsoftai.ca">hello@vitalsoftai.ca</a></li>
+          <li><a href="contact.html">Book a walkthrough</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 VitalSoftAI Inc. — Canada</span>
+      <span>vitalsoftai.ca</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
