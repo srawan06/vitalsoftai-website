@@ -173,7 +173,50 @@
     </div>
   </div>
 </footer>
+<script>
+const form = document.getElementById("contact-form");
+const status = document.getElementById("form-status");
 
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const payload = {
+    name: document.getElementById("name").value,
+    organization: document.getElementById("org").value,
+    email: document.getElementById("email").value,
+    interest: document.getElementById("interest").value,
+    message: document.getElementById("message").value
+  };
+
+  try {
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      form.reset();
+
+      status.classList.add("visible");
+      status.innerHTML =
+        "Thank you. Your message has been sent successfully.";
+    } else {
+      throw new Error("Failed");
+    }
+
+  } catch (err) {
+    status.classList.add("visible");
+    status.innerHTML =
+      "Unable to send message. Please try again.";
+  }
+});
+</script>
+  
 <script src="main.js"></script>
 </body>
 </html>
