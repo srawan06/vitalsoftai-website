@@ -178,6 +178,10 @@ const form = document.getElementById("contact-form");
 const status = document.getElementById("form-status");
 
 form.addEventListener("submit", async (e) => {
+
+    console.log("Contact endpoint hit");
+
+
   e.preventDefault();
 
   const payload = {
@@ -199,21 +203,28 @@ form.addEventListener("submit", async (e) => {
 
     const result = await response.json();
 
+if (!response.ok) {
+  throw new Error(result.error || "Unknown error");
+}
+
+if (!result.success) {
+  throw new Error(result.error || "Unknown error");
+}
+
     if (result.success) {
       form.reset();
 
       status.classList.add("visible");
       status.innerHTML =
         "Thank you. Your message has been sent successfully.";
-    } else {
-      throw new Error("Failed");
-    }
+    } 
 
   } catch (err) {
-    status.classList.add("visible");
-    status.innerHTML =
-      "Unable to send message. Please try again.";
-  }
+  console.error(err);
+
+  status.classList.add("visible");
+  status.textContent = err.message;
+}
 });
 </script>
   
