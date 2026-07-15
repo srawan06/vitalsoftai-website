@@ -1,467 +1,213 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>About — VitalSoftAI</title>
-    <meta name="description" content="VitalSoftAI is a Canadian software company building data and AI systems for health research teams." />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="style.css" />
-    <style>
-        /* ===== About Page Enhancements ===== */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 56px;
-            align-items: start;
-        }
-        .about-grid .mission-block,
-        .about-grid .work-block {
-            padding: 0;
-        }
-        .about-grid .mission-block .eyebrow,
-        .about-grid .work-block .eyebrow {
-            margin-bottom: 12px;
-        }
-        .about-grid h2 {
-            font-size: clamp(24px, 2.6vw, 32px);
-        }
-
-        /* Timeline */
-        .timeline {
-            margin-top: 44px;
-            border-left: 2px solid var(--line-dark);
-            padding-left: 32px;
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-        }
-        .timeline-item .year {
-            font-family: var(--f-mono);
-            font-size: 13px;
-            color: var(--coral-deep);
-            font-weight: 600;
-            letter-spacing: 0.04em;
-        }
-        .timeline-item h3 {
-            font-size: 19px;
-            margin-top: 4px;
-            margin-bottom: 4px;
-        }
-        .timeline-item p {
-            font-size: 15px;
-            margin: 0;
-        }
-
-        /* Values */
-        .values-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 32px;
-            margin-top: 40px;
-        }
-        .values-grid .value-card {
-            padding: 0;
-        }
-        .values-grid .value-card h3 {
-            font-size: 19px;
-            color: #fff;
-            margin-bottom: 6px;
-        }
-        .values-grid .value-card p {
-            color: rgba(255, 255, 255, 0.75);
-            font-size: 15px;
-            margin: 0;
-        }
-
-        /* Team */
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
-            margin-top: 40px;
-        }
-        .team-member {
-            text-align: center;
-        }
-        .team-member .avatar {
-            width: 72px;
-            height: 72px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: var(--f-mono);
-            font-weight: 600;
-            font-size: 18px;
-            color: #fff;
-            margin: 0 auto 12px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .team-member .avatar:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 24px rgba(11, 79, 74, 0.20);
-        }
-        .team-member .name {
-            font-weight: 600;
-            font-size: 15px;
-        }
-        .team-member .role {
-            font-size: 13px;
-            color: var(--ink-faint);
-        }
-
-        /* Responsive */
-        @media (max-width: 900px) {
-            .about-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-            .values-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .team-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        @media (max-width: 600px) {
-            .values-grid {
-                grid-template-columns: 1fr;
-            }
-            .team-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 16px;
-            }
-            .team-member .avatar {
-                width: 56px;
-                height: 56px;
-                font-size: 14px;
-            }
-            .timeline {
-                padding-left: 20px;
-                gap: 32px;
-            }
-            .timeline-item h3 {
-                font-size: 17px;
-            }
-        }
-        @media (max-width: 420px) {
-            .team-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — VitalSoftAI</title>
+<meta name="description" content="VitalSoftAI is a Canadian software company building data and AI systems for health research teams.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- ====== NAV ====== -->
-    <nav class="site-nav" id="siteNav">
-        <div class="wrap">
-            <a href="index.html" class="brand">
-                <svg class="pulse-mark" viewBox="0 0 28 18" aria-hidden="true">
-                    <path d="M0 9 H7 L10 2 L14 16 L17 9 H28" />
-                    <circle class="pulse-dot" cx="14" cy="9" r="1.6" />
-                </svg>
-                VitalSoft<span>AI</span>
-            </a>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="about.html" class="active">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="contact.html" class="nav-cta">Talk to us</a></li>
-            </ul>
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
-                <span></span><span></span><span></span>
-            </button>
-        </div>
-    </nav>
+<nav class="site-nav">
+  <div class="wrap">
+    <a href="index.html" class="brand">
+      <svg class="pulse-mark" viewBox="0 0 26 16"><path d="M0 8 H7 L10 1 L14 15 L17 8 H26"/></svg>
+      VitalSoft<span style="color:var(--coral)">AI</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="contact.html" class="nav-cta">Talk to us</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
 
-    <!-- ====== HERO ====== -->
-    <header class="hero">
-        <div class="wrap">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <p class="eyebrow">About VitalSoftAI</p>
-                    <h1>
-                        We build the software layer<br />
-                        <span class="highlight">under health research.</span>
-                    </h1>
-                    <p>
-                        Founded by engineers and researchers who spent too many nights reconciling
-                        spreadsheets before a submission deadline, VitalSoftAI exists to make the
-                        infrastructure behind health research as rigorous as the research itself.
-                    </p>
-                </div>
-                <div class="hero-visual">
-                    <div class="viz-wrap">
-                        <!-- Company evolution / timeline visualization -->
-                        <svg viewBox="0 0 400 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
-                                    <stop offset="0%" stop-color="#0B4F4A" stop-opacity="0.4"/>
-                                    <stop offset="100%" stop-color="#E15B3F" stop-opacity="0.6"/>
-                                </linearGradient>
-                            </defs>
-                            <!-- Grid lines -->
-                            <g opacity="0.04">
-                                <line x1="0" y1="70" x2="400" y2="70" stroke="#0B4F4A" stroke-width="0.5"/>
-                                <line x1="0" y1="140" x2="400" y2="140" stroke="#0B4F4A" stroke-width="0.5"/>
-                                <line x1="0" y1="210" x2="400" y2="210" stroke="#0B4F4A" stroke-width="0.5"/>
-                                <line x1="80" y1="0" x2="80" y2="280" stroke="#0B4F4A" stroke-width="0.5"/>
-                                <line x1="200" y1="0" x2="200" y2="280" stroke="#0B4F4A" stroke-width="0.5"/>
-                                <line x1="320" y1="0" x2="320" y2="280" stroke="#0B4F4A" stroke-width="0.5"/>
-                            </g>
+<header>
+  <div class="wrap" style="padding-top:60px;">
+    <p class="eyebrow">About VitalSoftAI</p>
+    <h1 style="font-size:clamp(34px,5vw,54px); max-width:20ch; line-height:1.08;">
+      We build the software layer under health research.
+    </h1>
+    <p style="font-size:17.5px; max-width:58ch; margin-top:18px;">
+      Founded by engineers and researchers who spent too many nights reconciling
+      spreadsheets before a submission deadline, VitalSoftAI exists to make the
+      infrastructure behind health research as rigorous as the research itself.
+    </p>
+  </div>
+  <svg class="trace" viewBox="0 0 1180 64" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 32 H500 L516 14 L534 50 L550 32 H1180" />
+    <path class="draw" d="M0 32 H500 L516 14 L534 50 L550 32 H1180" />
+  </svg>
+</header>
 
-                            <!-- Timeline path -->
-                            <path d="M60,220 L80,200 L120,180 L160,140 L200,120 L240,100 L280,80 L320,60" 
-                                  stroke="url(#lineGrad)" stroke-width="3" stroke-linecap="round" />
-                            <!-- Animated node -->
-                            <circle cx="60" cy="220" r="6" fill="#0B4F4A" opacity="0.6">
-                                <animate attributeName="r" values="5;8;5" dur="2s" repeatCount="indefinite"/>
-                            </circle>
-                            <circle cx="320" cy="60" r="8" fill="#E15B3F" opacity="0.9">
-                                <animate attributeName="r" values="7;10;7" dur="2.4s" repeatCount="indefinite"/>
-                            </circle>
-                            <!-- Milestones -->
-                            <circle cx="120" cy="180" r="5" fill="#0B4F4A" opacity="0.5"/>
-                            <circle cx="200" cy="120" r="5" fill="#0B4F4A" opacity="0.5"/>
-                            <circle cx="280" cy="80" r="5" fill="#0B4F4A" opacity="0.5"/>
+<!-- MISSION -->
+<section class="panel-bg">
+  <div class="wrap" style="display:grid; grid-template-columns:1fr 1fr; gap:56px;">
+    <div>
+      <p class="eyebrow">Why we exist</p>
+      <h2 style="font-size:28px;">Research is slowed more by data plumbing than by science.</h2>
+      <p>Every research team we've worked with has the same story: strong hypotheses,
+      capable people, and a data pipeline held together with exports, emails, and
+      trust. We think that's a solvable engineering problem, not a permanent cost
+      of doing research — so we build the platform that removes it.</p>
+    </div>
+    <div>
+      <p class="eyebrow">How we work</p>
+      <h2 style="font-size:28px;">Embedded with your team, not handed off to it.</h2>
+      <p>We build alongside research operations, biostatistics, and IT from day one,
+      so the systems we ship match how your team actually works — and stay
+      maintainable long after launch.</p>
+    </div>
+  </div>
+</section>
 
-                            <!-- Labels -->
-                            <text x="30" y="240" font-family="'IBM Plex Mono', monospace" font-size="8" fill="#0B4F4A" opacity="0.5">2020</text>
-                            <text x="92" y="204" font-family="'IBM Plex Mono', monospace" font-size="8" fill="#0B4F4A" opacity="0.5">2022</text>
-                            <text x="170" y="145" font-family="'IBM Plex Mono', monospace" font-size="8" fill="#0B4F4A" opacity="0.5">2024</text>
-                            <text x="250" y="105" font-family="'IBM Plex Mono', monospace" font-size="8" fill="#0B4F4A" opacity="0.5">Now</text>
-                            <text x="290" y="50" font-family="'IBM Plex Mono', monospace" font-size="8" fill="#E15B3F" font-weight="600">→ scale</text>
+<!-- TIMELINE -->
+<section class="alt-bg">
+  <div class="wrap">
+    <p class="eyebrow">How we got here</p>
+    <h2 style="font-size:clamp(24px,3vw,32px); max-width:26ch;">A short, deliberate path.</h2>
 
-                            <!-- Animated data packet along path -->
-                            <circle cx="60" cy="220" r="4" fill="#E15B3F" opacity="0.6">
-                                <animateMotion dur="5s" repeatCount="indefinite" path="M60,220 L80,200 L120,180 L160,140 L200,120 L240,100 L280,80 L320,60" />
-                            </circle>
-                        </svg>
-                        <div class="float-dot"></div>
-                        <div class="float-dot"></div>
-                        <div class="float-dot"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Waveform Divider -->
-        <svg class="trace" viewBox="0 0 1180 64" preserveAspectRatio="none" aria-hidden="true">
-            <path d="M0 32 H500 L516 14 L534 50 L550 32 H1180" />
-            <path class="draw" d="M0 32 H500 L516 14 L534 50 L550 32 H1180" />
-        </svg>
-    </header>
+    <div style="margin-top:44px; border-left:2px solid var(--line-dark); padding-left:28px; display:flex; flex-direction:column; gap:36px;">
+      <div class="reveal">
+        <div style="font-family:var(--f-mono); font-size:13px; color:var(--coral-deep);">2020</div>
+        <h3 style="font-size:19px; margin-top:6px;">Started inside a hospital research unit</h3>
+        <p>Built as an internal tool to unify trial data across three clinics before
+        becoming its own company.</p>
+      </div>
+      <div class="reveal">
+        <div style="font-family:var(--f-mono); font-size:13px; color:var(--coral-deep);">2022</div>
+        <h3 style="font-size:19px; margin-top:6px;">First platform customers</h3>
+        <p>Expanded beyond the founding hospital network to academic and
+        biotech research partners across Canada.</p>
+      </div>
+      <div class="reveal">
+        <div style="font-family:var(--f-mono); font-size:13px; color:var(--coral-deep);">2024</div>
+        <h3 style="font-size:19px; margin-top:6px;">Introduced research-grade AI tooling</h3>
+        <p>Added cohort discovery and predictive modelling, built and validated
+        alongside biostatistics teams.</p>
+      </div>
+      <div class="reveal">
+        <div style="font-family:var(--f-mono); font-size:13px; color:var(--coral-deep);">Today</div>
+        <h3 style="font-size:19px; margin-top:6px;">A full platform for the research data lifecycle</h3>
+        <p>From capture to analysis to compliance — supporting 40+ research and
+        hospital networks.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- ====== MISSION / HOW WE WORK ====== -->
-    <section class="panel-bg">
-        <div class="wrap">
-            <div class="about-grid reveal">
-                <div class="mission-block">
-                    <p class="eyebrow">Why we exist</p>
-                    <h2>Research is slowed more by data plumbing than by science.</h2>
-                    <p>Every research team we've worked with has the same story: strong hypotheses, capable people, and a data pipeline held together with exports, emails, and trust. We think that's a solvable engineering problem, not a permanent cost of doing research — so we build the platform that removes it.</p>
-                </div>
-                <div class="work-block">
-                    <p class="eyebrow">How we work</p>
-                    <h2>Embedded with your team, not handed off to it.</h2>
-                    <p>We build alongside research operations, biostatistics, and IT from day one, so the systems we ship match how your team actually works — and stay maintainable long after launch.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- VALUES -->
+<section class="dark">
+  <div class="wrap">
+    <p class="eyebrow">What guides the work</p>
+    <h2 style="font-size:clamp(24px,3vw,32px); max-width:24ch;">Three things we don't compromise on.</h2>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:32px; margin-top:40px;">
+      <div>
+        <h3 style="font-size:19px; color:#fff;">Data integrity</h3>
+        <p>Every transformation is traceable back to its source. If we can't explain
+        where a number came from, it doesn't ship.</p>
+      </div>
+      <div>
+        <h3 style="font-size:19px; color:#fff;">Privacy by default</h3>
+        <p>Access controls and consent tracking aren't a module — they're built into
+        how every system handles data from the start.</p>
+      </div>
+      <div>
+        <h3 style="font-size:19px; color:#fff;">Built to be understood</h3>
+        <p>Your team should be able to reason about the system we leave behind,
+        not just operate it.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- ====== TIMELINE ====== -->
-    <section class="alt-bg">
-        <div class="wrap">
-            <p class="eyebrow">How we got here</p>
-            <h2 style="font-size:clamp(24px,3vw,32px); max-width:26ch;">A short, deliberate path.</h2>
+<!-- TEAM -->
+<section class="panel-bg">
+  <div class="wrap">
+    <p class="eyebrow">The team</p>
+    <h2 style="font-size:clamp(24px,3vw,32px); max-width:26ch;">Engineers, researchers, and one biostatistician who insists on both.</h2>
+    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:24px; margin-top:40px;">
+      <div class="reveal" style="text-align:center;">
+        <div style="width:64px; height:64px; border-radius:50%; background:var(--teal); color:#fff; display:flex; align-items:center; justify-content:center; font-family:var(--f-mono); font-weight:600; margin:0 auto 12px;">RA</div>
+        <div style="font-weight:600; font-size:15px;">R. Anand</div>
+        <div style="font-size:13px; color:var(--ink-faint);">Co-founder, Engineering</div>
+      </div>
+      <div class="reveal" style="text-align:center;">
+        <div style="width:64px; height:64px; border-radius:50%; background:var(--coral); color:#fff; display:flex; align-items:center; justify-content:center; font-family:var(--f-mono); font-weight:600; margin:0 auto 12px;">LM</div>
+        <div style="font-weight:600; font-size:15px;">L. Marchand</div>
+        <div style="font-size:13px; color:var(--ink-faint);">Co-founder, Research</div>
+      </div>
+      <div class="reveal" style="text-align:center;">
+        <div style="width:64px; height:64px; border-radius:50%; background:var(--gold); color:#fff; display:flex; align-items:center; justify-content:center; font-family:var(--f-mono); font-weight:600; margin:0 auto 12px;">SK</div>
+        <div style="font-weight:600; font-size:15px;">S. Khoury</div>
+        <div style="font-size:13px; color:var(--ink-faint);">Biostatistics Lead</div>
+      </div>
+      <div class="reveal" style="text-align:center;">
+        <div style="width:64px; height:64px; border-radius:50%; background:var(--ink-soft); color:#fff; display:flex; align-items:center; justify-content:center; font-family:var(--f-mono); font-weight:600; margin:0 auto 12px;">JT</div>
+        <div style="font-weight:600; font-size:15px;">J. Tremblay</div>
+        <div style="font-size:13px; color:var(--ink-faint);">Privacy &amp; Compliance</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-            <div class="timeline">
-                <div class="timeline-item reveal">
-                    <div class="year">2020</div>
-                    <h3>Started inside a hospital research unit</h3>
-                    <p>Built as an internal tool to unify trial data across three clinics before becoming its own company.</p>
-                </div>
-                <div class="timeline-item reveal">
-                    <div class="year">2022</div>
-                    <h3>First platform customers</h3>
-                    <p>Expanded beyond the founding hospital network to academic and biotech research partners across Canada.</p>
-                </div>
-                <div class="timeline-item reveal">
-                    <div class="year">2024</div>
-                    <h3>Introduced research-grade AI tooling</h3>
-                    <p>Added cohort discovery and predictive modelling, built and validated alongside biostatistics teams.</p>
-                </div>
-                <div class="timeline-item reveal">
-                    <div class="year">Today</div>
-                    <h3>A full platform for the research data lifecycle</h3>
-                    <p>From capture to analysis to compliance — supporting 40+ research and hospital networks.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<section class="alt-bg" style="text-align:center;">
+  <div class="wrap">
+    <h2 style="font-size:clamp(24px,3.4vw,36px); max-width:24ch; margin:0 auto 18px;">
+      Want to see how we'd approach your study?
+    </h2>
+    <a href="contact.html" class="btn btn-primary">Book a walkthrough</a>
+  </div>
+</section>
 
-    <!-- ====== VALUES ====== -->
-    <section class="dark">
-        <div class="wrap">
-            <p class="eyebrow light">What guides the work</p>
-            <h2 style="font-size:clamp(24px,3vw,32px); max-width:24ch;">Three things we don't compromise on.</h2>
-            <div class="values-grid">
-                <div class="value-card reveal reveal-delay-1">
-                    <h3>Data integrity</h3>
-                    <p>Every transformation is traceable back to its source. If we can't explain where a number came from, it doesn't ship.</p>
-                </div>
-                <div class="value-card reveal reveal-delay-2">
-                    <h3>Privacy by default</h3>
-                    <p>Access controls and consent tracking aren't a module — they're built into how every system handles data from the start.</p>
-                </div>
-                <div class="value-card reveal reveal-delay-3">
-                    <h3>Built to be understood</h3>
-                    <p>Your team should be able to reason about the system we leave behind, not just operate it.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="index.html" class="brand" style="margin-bottom:14px; display:flex;">
+          <svg class="pulse-mark" viewBox="0 0 26 16"><path d="M0 8 H7 L10 1 L14 15 L17 8 H26" stroke="rgba(255,255,255,0.75)"/></svg>
+          VitalSoftAI
+        </a>
+        <p style="font-size:13.5px; max-width:32ch;">Software and AI systems for health research teams. Built in Canada, aligned to PIPEDA and PHIPA.</p>
+      </div>
+      <div>
+        <h4>Site</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html">Data platform</a></li>
+          <li><a href="services.html">Analytics &amp; AI</a></li>
+          <li><a href="services.html">Integrations</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:hello@vitalsoftai.ca">hello@vitalsoftai.ca</a></li>
+          <li><a href="contact.html">Book a walkthrough</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 VitalSoftAI Inc. — Canada</span>
+      <span>vitalsoftai.ca</span>
+    </div>
+  </div>
+</footer>
 
-    <!-- ====== TEAM ====== -->
-    <section class="panel-bg">
-        <div class="wrap">
-            <p class="eyebrow">The team</p>
-            <h2 style="font-size:clamp(24px,3vw,32px); max-width:26ch;">Engineers, researchers, and one biostatistician who insists on both.</h2>
-            <div class="team-grid">
-                <div class="team-member reveal reveal-delay-1">
-                    <div class="avatar" style="background:var(--teal);">RA</div>
-                    <div class="name">R. Anand</div>
-                    <div class="role">Co-founder, Engineering</div>
-                </div>
-                <div class="team-member reveal reveal-delay-2">
-                    <div class="avatar" style="background:var(--coral);">LM</div>
-                    <div class="name">L. Marchand</div>
-                    <div class="role">Co-founder, Research</div>
-                </div>
-                <div class="team-member reveal reveal-delay-3">
-                    <div class="avatar" style="background:var(--gold);">SK</div>
-                    <div class="name">S. Khoury</div>
-                    <div class="role">Biostatistics Lead</div>
-                </div>
-                <div class="team-member reveal reveal-delay-4">
-                    <div class="avatar" style="background:var(--ink-soft);">JT</div>
-                    <div class="name">J. Tremblay</div>
-                    <div class="role">Privacy &amp; Compliance</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ====== CTA ====== -->
-    <section class="alt-bg cta-section" style="text-align:center;">
-        <div class="glow-ring"></div>
-        <div class="wrap">
-            <h2 style="font-size:clamp(24px,3.4vw,36px); max-width:24ch; margin:0 auto 18px;">
-                Want to see how we'd approach your study?
-            </h2>
-            <a href="contact.html" class="btn btn-primary">
-                Book a walkthrough
-                <span class="icon-arrow">→</span>
-            </a>
-        </div>
-    </section>
-
-    <!-- ====== FOOTER ====== -->
-    <footer>
-        <div class="wrap">
-            <div class="foot-grid">
-                <div class="foot-brand">
-                    <a href="index.html" class="brand">
-                        <svg class="pulse-mark" viewBox="0 0 28 18" aria-hidden="true">
-                            <path d="M0 9 H7 L10 2 L14 16 L17 9 H28" />
-                            <circle class="pulse-dot" cx="14" cy="9" r="1.6" />
-                        </svg>
-                        VitalSoft<span>AI</span>
-                    </a>
-                    <p>Software and AI systems for health research teams. Built in Canada, aligned to PIPEDA and PHIPA.</p>
-                </div>
-                <div>
-                    <h4>Site</h4>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4>Services</h4>
-                    <ul>
-                        <li><a href="services.html">Data platform</a></li>
-                        <li><a href="services.html">Analytics &amp; AI</a></li>
-                        <li><a href="services.html">Integrations</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4>Contact</h4>
-                    <ul>
-                        <li><a href="mailto:hello@vitalsoftai.ca">hello@vitalsoftai.ca</a></li>
-                        <li><a href="contact.html">Book a walkthrough</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="foot-bottom">
-                <span>© 2026 VitalSoftAI Inc. — Canada</span>
-                <span>vitalsoftai.ca</span>
-            </div>
-        </div>
-    </footer>
-
-    <!-- ====== SCRIPTS ====== -->
-    <script>
-        // Mobile nav toggle
-        const toggle = document.getElementById('navToggle');
-        const links = document.getElementById('navLinks');
-        if (toggle && links) {
-            toggle.addEventListener('click', () => {
-                const isOpen = links.classList.toggle('open');
-                toggle.classList.toggle('open');
-                toggle.setAttribute('aria-expanded', isOpen);
-            });
-            links.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    links.classList.remove('open');
-                    toggle.classList.remove('open');
-                    toggle.setAttribute('aria-expanded', 'false');
-                });
-            });
-        }
-
-        // Nav shadow on scroll
-        const nav = document.getElementById('siteNav');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 20) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
-
-        // Reveal on scroll
-        const reveals = document.querySelectorAll('.reveal');
-        if (reveals.length && 'IntersectionObserver' in window) {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('in');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-            reveals.forEach(el => observer.observe(el));
-        } else {
-            reveals.forEach(el => el.classList.add('in'));
-        }
-    </script>
-
+<script src="main.js"></script>
 </body>
 </html>

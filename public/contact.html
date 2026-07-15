@@ -1,520 +1,233 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact — VitalSoftAI</title>
-    <meta name="description" content="Book a walkthrough with VitalSoftAI or reach the team directly.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <style>
-        /* ===== Contact Page Enhancements ===== */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1.3fr 1fr;
-            gap: 56px;
-            align-items: start;
-        }
-
-        /* Form Fields */
-        .form-field {
-            margin-bottom: 20px;
-        }
-        .form-field label {
-            display: block;
-            font-family: var(--f-mono);
-            font-size: 12px;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            color: var(--ink-soft);
-            margin-bottom: 6px;
-            font-weight: 500;
-        }
-        .form-field input,
-        .form-field textarea,
-        .form-field select {
-            width: 100%;
-            font-family: var(--f-body);
-            font-size: 15px;
-            color: var(--ink);
-            background: var(--panel);
-            border: 1px solid var(--line);
-            border-radius: var(--radius-sm);
-            padding: 12px 16px;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
-            resize: vertical;
-        }
-        .form-field input:focus,
-        .form-field textarea:focus,
-        .form-field select:focus {
-            outline: none;
-            border-color: var(--teal);
-            box-shadow: 0 0 0 3px var(--teal-glow);
-        }
-        .form-field textarea {
-            min-height: 130px;
-        }
-        .form-field select {
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234C5D56' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 16px center;
-            cursor: pointer;
-        }
-
-        /* Form Status */
-        #form-status {
-            display: none;
-            margin-top: 20px;
-            padding: 14px 20px;
-            border-radius: 50px;
-            font-size: 14px;
-            font-weight: 500;
-            background: var(--teal-glow);
-            color: var(--teal-deep);
-            border: 1px solid rgba(11, 79, 74, 0.15);
-        }
-        #form-status.visible {
-            display: block;
-        }
-        #form-status.error {
-            background: rgba(225, 91, 63, 0.12);
-            color: var(--coral-deep);
-            border-color: rgba(225, 91, 63, 0.20);
-        }
-
-        /* Contact Info Cards */
-        .contact-card {
-            background: var(--panel);
-            border: 1px solid var(--line);
-            border-radius: var(--radius);
-            padding: 24px 26px;
-            margin-bottom: 18px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            box-shadow: var(--shadow-card);
-        }
-        .contact-card:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-hover);
-        }
-        .contact-card:last-child {
-            margin-bottom: 0;
-        }
-        .contact-card h4 {
-            font-family: var(--f-mono);
-            font-size: 11px;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--coral-deep);
-            margin-bottom: 6px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .contact-card h4 .icon {
-            width: 18px;
-            height: 18px;
-            stroke: var(--coral-deep);
-            stroke-width: 2;
-            fill: none;
-        }
-        .contact-card p,
-        .contact-card a {
-            margin: 0;
-            font-size: 15px;
-            color: var(--ink-soft);
-        }
-        .contact-card a {
-            color: var(--teal);
-            font-weight: 500;
-            text-decoration: none;
-        }
-        .contact-card a:hover {
-            color: var(--teal-deep);
-            text-decoration: underline;
-        }
-
-        /* Responsive */
-        @media (max-width: 900px) {
-            .contact-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-            .contact-grid .form-wrapper {
-                order: 1;
-            }
-            .contact-grid .info-wrapper {
-                order: 2;
-            }
-        }
-        @media (max-width: 600px) {
-            .contact-grid {
-                gap: 32px;
-            }
-            .contact-card {
-                padding: 18px 20px;
-            }
-            .contact-card p,
-            .contact-card a {
-                font-size: 14px;
-            }
-            .form-field input,
-            .form-field textarea,
-            .form-field select {
-                font-size: 14px;
-                padding: 10px 14px;
-            }
-        }
-
-        /* Network SVG animation override for contact hero */
-        .contact-hero .viz-wrap {
-            background: rgba(255, 255, 255, 0.40);
-            backdrop-filter: blur(4px);
-        }
-        .contact-hero .viz-wrap .net-path {
-            stroke: var(--teal);
-            stroke-width: 1.5;
-            opacity: 0.25;
-        }
-        .contact-hero .viz-wrap .net-node {
-            fill: var(--teal);
-            opacity: 0.5;
-        }
-        .contact-hero .viz-wrap .net-node.center {
-            fill: var(--coral);
-            opacity: 0.7;
-        }
-        .contact-hero .viz-wrap .packet {
-            fill: var(--coral);
-            r: 4.5;
-        }
-        .contact-hero .viz-wrap .packet-glow {
-            fill: var(--coral-glow);
-            r: 12;
-            opacity: 0.3;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — VitalSoftAI</title>
+<meta name="description" content="Book a walkthrough with VitalSoftAI or reach the team directly.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .form-field{ margin-bottom:20px; }
+  .form-field label{
+    display:block; font-family:var(--f-mono); font-size:12.5px;
+    letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-soft);
+    margin-bottom:8px;
+  }
+  .form-field input, .form-field textarea, .form-field select{
+    width:100%; font-family:var(--f-body); font-size:15px; color:var(--ink);
+    background:var(--panel); border:1px solid var(--line-dark); border-radius:3px;
+    padding:12px 14px; resize:vertical;
+  }
+  .form-field textarea{ min-height:120px; }
+  #form-status{
+    display:none; margin-top:16px; padding:12px 16px; border-radius:3px;
+    background:rgba(11,79,74,0.1); color:var(--teal-deep); font-size:14px;
+  }
+  #form-status.visible{ display:block; }
+  .contact-card{
+    background:var(--panel); border:1px solid var(--line); border-radius:4px;
+    padding:26px; margin-bottom:18px;
+  }
+  .contact-card h4{
+    font-family:var(--f-mono); font-size:12px; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--coral-deep); margin-bottom:8px; font-weight:600;
+  }
+</style>
 </head>
 <body>
 
-    <!-- ====== NAV ====== -->
-    <nav class="site-nav" id="siteNav">
-        <div class="wrap">
-            <a href="index.html" class="brand">
-                <svg class="pulse-mark" viewBox="0 0 28 18" aria-hidden="true">
-                    <path d="M0 9 H7 L10 2 L14 16 L17 9 H28" />
-                    <circle class="pulse-dot" cx="14" cy="9" r="1.6" />
-                </svg>
-                VitalSoft<span>AI</span>
-            </a>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html" class="active">Contact</a></li>
-                <li><a href="contact.html" class="nav-cta">Talk to us</a></li>
-            </ul>
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
-                <span></span><span></span><span></span>
-            </button>
+<nav class="site-nav">
+  <div class="wrap">
+    <a href="index.html" class="brand">
+      <svg class="pulse-mark" viewBox="0 0 26 16"><path d="M0 8 H7 L10 1 L14 15 L17 8 H26"/></svg>
+      VitalSoft<span style="color:var(--coral)">AI</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+      <li><a href="contact.html" class="nav-cta">Talk to us</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap" style="padding-top:60px;">
+    <p class="eyebrow">Contact</p>
+    <h1 style="font-size:clamp(34px,5vw,54px); max-width:18ch; line-height:1.08;">
+      Let's map your data to the platform.
+    </h1>
+    <p style="font-size:17.5px; max-width:52ch; margin-top:18px;">
+      Tell us about your study or systems below, or reach us directly — we
+      typically reply within one business day.
+    </p>
+  </div>
+  <svg class="trace" viewBox="0 0 1180 64" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 32 H600 L616 12 L636 52 L654 32 H1180" />
+    <path class="draw" d="M0 32 H600 L616 12 L636 52 L654 32 H1180" />
+  </svg>
+</header>
+
+<section class="panel-bg" style="padding-top:0;">
+  <div class="wrap" style="display:grid; grid-template-columns:1.3fr 1fr; gap:56px;">
+
+    <form id="contact-form">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+        <div class="form-field">
+          <label for="name">Full name</label>
+          <input type="text" id="name" name="name" required>
         </div>
-    </nav>
-
-    <!-- ====== HERO ====== -->
-    <header class="hero contact-hero">
-        <div class="wrap">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <p class="eyebrow">Contact</p>
-                    <h1>
-                        Let's map your data<br />
-                        <span class="highlight">to the platform.</span>
-                    </h1>
-                    <p>
-                        Tell us about your study or systems below, or reach us directly — we
-                        typically reply within one business day.
-                    </p>
-                </div>
-                <div class="hero-visual">
-                    <div class="viz-wrap">
-                        <!-- Animated Network / Data Flow Visualization -->
-                        <svg viewBox="0 0 400 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Grid lines -->
-                            <g opacity="0.04">
-                                <line x1="0" y1="70" x2="400" y2="70" stroke="#0B4F4A" stroke-width="0.5"/>
-                                <line x1="0" y1="140" x2="400" y2="140" stroke="#0B4F4A" stroke-width="0.5"/>
-                                <line x1="0" y1="210" x2="400" y2="210" stroke="#0B4F4A" stroke-width="0.5"/>
-                                <line x1="80" y1="0" x2="80" y2="280" stroke="#0B4F4A" stroke-width="0.5"/>
-                                <line x1="200" y1="0" x2="200" y2="280" stroke="#0B4F4A" stroke-width="0.5"/>
-                                <line x1="320" y1="0" x2="320" y2="280" stroke="#0B4F4A" stroke-width="0.5"/>
-                            </g>
-
-                            <!-- Network Paths -->
-                            <path class="net-path" d="M200,140 L80,80 L320,80 L200,140 L80,200 L320,200 L200,140" />
-                            <path class="net-path" d="M80,80 L80,200" opacity="0.15"/>
-                            <path class="net-path" d="M320,80 L320,200" opacity="0.15"/>
-
-                            <!-- Nodes -->
-                            <circle class="net-node center" cx="200" cy="140" r="10" />
-                            <circle class="net-node" cx="80" cy="80" r="7" />
-                            <circle class="net-node" cx="320" cy="80" r="7" />
-                            <circle class="net-node" cx="80" cy="200" r="7" />
-                            <circle class="net-node" cx="320" cy="200" r="7" />
-
-                            <!-- Labels -->
-                            <text x="172" y="135" font-family="'IBM Plex Mono', monospace" font-size="7" fill="#E15B3F" font-weight="600">Hub</text>
-                            <text x="52" y="74" font-family="'IBM Plex Mono', monospace" font-size="7" fill="#0B4F4A" opacity="0.5">EHR</text>
-                            <text x="292" y="74" font-family="'IBM Plex Mono', monospace" font-size="7" fill="#0B4F4A" opacity="0.5">AI</text>
-                            <text x="40" y="210" font-family="'IBM Plex Mono', monospace" font-size="7" fill="#0B4F4A" opacity="0.5">Comply</text>
-                            <text x="280" y="210" font-family="'IBM Plex Mono', monospace" font-size="7" fill="#0B4F4A" opacity="0.5">Data</text>
-
-                            <!-- Animated Data Packet -->
-                            <circle class="packet" r="4.5" fill="#E15B3F">
-                                <animateMotion dur="4s" repeatCount="indefinite" path="M200,140 L80,80 L320,80 L200,140 L80,200 L320,200 L200,140" />
-                            </circle>
-                            <!-- Packet Glow -->
-                            <circle class="packet-glow" r="12" fill="#E15B3F" opacity="0.2">
-                                <animateMotion dur="4s" repeatCount="indefinite" path="M200,140 L80,80 L320,80 L200,140 L80,200 L320,200 L200,140" />
-                            </circle>
-
-                            <!-- Floating annotation -->
-                            <rect x="244" y="154" width="88" height="22" rx="8" fill="rgba(255,255,255,0.80)" stroke="rgba(199,209,201,0.3)" stroke-width="0.5"/>
-                            <text x="252" y="170" font-family="'IBM Plex Mono', monospace" font-size="8" fill="#0B4F4A" font-weight="500">DATA FLOW</text>
-                        </svg>
-                        <!-- Floating dots -->
-                        <div class="float-dot"></div>
-                        <div class="float-dot"></div>
-                        <div class="float-dot"></div>
-                    </div>
-                </div>
-            </div>
+        <div class="form-field">
+          <label for="org">Organization</label>
+          <input type="text" id="org" name="org" required>
         </div>
-        <!-- Waveform Divider -->
-        <svg class="trace" viewBox="0 0 1180 64" preserveAspectRatio="none" aria-hidden="true">
-            <path d="M0 32 H600 L616 12 L636 52 L654 32 H1180" />
-            <path class="draw" d="M0 32 H600 L616 12 L636 52 L654 32 H1180" />
-        </svg>
-    </header>
+      </div>
+      <div class="form-field">
+        <label for="email">Work email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-field">
+        <label for="interest">What are you looking into?</label>
+        <select id="interest" name="interest">
+          <option>Clinical data platform</option>
+          <option>Research analytics &amp; AI</option>
+          <option>EHR / systems integration</option>
+          <option>Compliance &amp; governance</option>
+          <option>Not sure yet</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label for="message">Tell us about your study or systems</label>
+        <textarea id="message" name="message" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Send message</button>
+      <div id="form-status" role="status"></div>
+    </form>
 
-    <!-- ====== CONTACT FORM & INFO ====== -->
-    <section class="panel-bg" style="padding-top:0;">
-        <div class="wrap">
-            <div class="contact-grid reveal">
-                <!-- Form Column -->
-                <div class="form-wrapper">
-                    <form id="contact-form">
-                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
-                            <div class="form-field">
-                                <label for="name">Full name</label>
-                                <input type="text" id="name" name="name" placeholder="Dr. Jane Smith" required>
-                            </div>
-                            <div class="form-field">
-                                <label for="org">Organization</label>
-                                <input type="text" id="org" name="org" placeholder="University Health Network" required>
-                            </div>
-                        </div>
-                        <div class="form-field">
-                            <label for="email">Work email</label>
-                            <input type="email" id="email" name="email" placeholder="jane.smith@uhn.ca" required>
-                        </div>
-                        <div class="form-field">
-                            <label for="interest">What are you looking into?</label>
-                            <select id="interest" name="interest">
-                                <option>Clinical data platform</option>
-                                <option>Research analytics &amp; AI</option>
-                                <option>EHR / systems integration</option>
-                                <option>Compliance &amp; governance</option>
-                                <option>Not sure yet</option>
-                            </select>
-                        </div>
-                        <div class="form-field">
-                            <label for="message">Tell us about your study or systems</label>
-                            <textarea id="message" name="message" placeholder="We're running a multi-site trial and need to unify data from 5 hospitals..." required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">
-                            Send message
-                            <span class="icon-arrow">→</span>
-                        </button>
-                        <div id="form-status" role="status"></div>
-                    </form>
-                </div>
+    <div>
+      <div class="contact-card">
+        <h4>Email</h4>
+        <a href="mailto:hello@vitalsoftai.ca" style="font-size:16px;">hello@vitalsoftai.ca</a>
+      </div>
+      <div class="contact-card">
+        <h4>Response time</h4>
+        <p style="margin:0; font-size:15px;">One business day, typically faster during
+        the work week.</p>
+      </div>
+      <div class="contact-card">
+        <h4>Head office</h4>
+        <p style="margin:0; font-size:15px;">Toronto, Ontario, Canada<br>Remote-first across Canada</p>
+      </div>
+      <div class="contact-card" style="margin-bottom:0;">
+        <h4>Enterprise &amp; procurement</h4>
+        <p style="margin:0; font-size:15px;">Security documentation and vendor
+        questionnaires available on request.</p>
+      </div>
+    </div>
 
-                <!-- Info Cards Column -->
-                <div class="info-wrapper">
-                    <div class="contact-card reveal reveal-delay-1">
-                        <h4>
-                            <svg class="icon" viewBox="0 0 24 24"><path d="M4 4H20C21.1046 4 22 4.89543 22 6V18C22 19.1046 21.1046 20 20 20H4C2.89543 20 2 19.1046 2 18V6C2 4.89543 2.89543 4 4 4Z" stroke="currentColor" stroke-width="1.8"/><path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-                            Email
-                        </h4>
-                        <a href="mailto:hello@vitalsoftai.ca">hello@vitalsoftai.ca</a>
-                    </div>
+  </div>
+</section>
 
-                    <div class="contact-card reveal reveal-delay-2">
-                        <h4>
-                            <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.8"/><path d="M12 6V12L15 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-                            Response time
-                        </h4>
-                        <p>One business day, typically faster during the work week.</p>
-                    </div>
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="index.html" class="brand" style="margin-bottom:14px; display:flex;">
+          <svg class="pulse-mark" viewBox="0 0 26 16"><path d="M0 8 H7 L10 1 L14 15 L17 8 H26" stroke="rgba(255,255,255,0.75)"/></svg>
+          VitalSoftAI
+        </a>
+        <p style="font-size:13.5px; max-width:32ch;">Software and AI systems for health research teams. Built in Canada, aligned to PIPEDA and PHIPA.</p>
+      </div>
+      <div>
+        <h4>Site</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html">Data platform</a></li>
+          <li><a href="services.html">Analytics &amp; AI</a></li>
+          <li><a href="services.html">Integrations</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:hello@vitalsoftai.ca">hello@vitalsoftai.ca</a></li>
+          <li><a href="contact.html">Book a walkthrough</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 VitalSoftAI Inc. — Canada</span>
+      <span>vitalsoftai.ca</span>
+    </div>
+  </div>
+</footer>
+<script>
+const form = document.getElementById("contact-form");
+const status = document.getElementById("form-status");
 
-                    <div class="contact-card reveal reveal-delay-3">
-                        <h4>
-                            <svg class="icon" viewBox="0 0 24 24"><path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 4.47715 7.47715 0 12 0C16.5228 0 21 4.47715 21 10Z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.8"/></svg>
-                            Head office
-                        </h4>
-                        <p>Toronto, Ontario, Canada<br>Remote-first across Canada</p>
-                    </div>
+form.addEventListener("submit", async (e) => {
 
-                    <div class="contact-card reveal reveal-delay-4">
-                        <h4>
-                            <svg class="icon" viewBox="0 0 24 24"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="1.8"/><path d="M8 12L11 15L16 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                            Enterprise &amp; procurement
-                        </h4>
-                        <p>Security documentation and vendor questionnaires available on request.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    console.log("Contact endpoint hit");
 
-    <!-- ====== FOOTER ====== -->
-    <footer>
-        <div class="wrap">
-            <div class="foot-grid">
-                <div class="foot-brand">
-                    <a href="index.html" class="brand">
-                        <svg class="pulse-mark" viewBox="0 0 28 18" aria-hidden="true">
-                            <path d="M0 9 H7 L10 2 L14 16 L17 9 H28" />
-                            <circle class="pulse-dot" cx="14" cy="9" r="1.6" />
-                        </svg>
-                        VitalSoft<span>AI</span>
-                    </a>
-                    <p>Software and AI systems for health research teams. Built in Canada, aligned to PIPEDA and PHIPA.</p>
-                </div>
-                <div>
-                    <h4>Site</h4>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4>Services</h4>
-                    <ul>
-                        <li><a href="services.html">Data platform</a></li>
-                        <li><a href="services.html">Analytics &amp; AI</a></li>
-                        <li><a href="services.html">Integrations</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4>Contact</h4>
-                    <ul>
-                        <li><a href="mailto:hello@vitalsoftai.ca">hello@vitalsoftai.ca</a></li>
-                        <li><a href="contact.html">Book a walkthrough</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="foot-bottom">
-                <span>© 2026 VitalSoftAI Inc. — Canada</span>
-                <span>vitalsoftai.ca</span>
-            </div>
-        </div>
-    </footer>
 
-    <!-- ====== SCRIPTS ====== -->
-    <script>
-        // Mobile nav toggle
-        const toggle = document.getElementById('navToggle');
-        const links = document.getElementById('navLinks');
-        if (toggle && links) {
-            toggle.addEventListener('click', () => {
-                const isOpen = links.classList.toggle('open');
-                toggle.classList.toggle('open');
-                toggle.setAttribute('aria-expanded', isOpen);
-            });
-            links.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    links.classList.remove('open');
-                    toggle.classList.remove('open');
-                    toggle.setAttribute('aria-expanded', 'false');
-                });
-            });
-        }
+  e.preventDefault();
 
-        // Nav shadow on scroll
-        const nav = document.getElementById('siteNav');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 20) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
+  const payload = {
+    name: document.getElementById("name").value,
+    organization: document.getElementById("org").value,
+    email: document.getElementById("email").value,
+    interest: document.getElementById("interest").value,
+    message: document.getElementById("message").value
+  };
 
-        // Reveal on scroll
-        const reveals = document.querySelectorAll('.reveal');
-        if (reveals.length && 'IntersectionObserver' in window) {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('in');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-            reveals.forEach(el => observer.observe(el));
-        } else {
-            reveals.forEach(el => el.classList.add('in'));
-        }
+  try {
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
 
-        // ====== Form Handler ======
-        const form = document.getElementById("contact-form");
-        const status = document.getElementById("form-status");
+    const result = await response.json();
 
-        form.addEventListener("submit", async (e) => {
-            e.preventDefault();
+if (!response.ok) {
+  throw new Error(result.error || "Unknown error");
+}
 
-            const payload = {
-                name: document.getElementById("name").value,
-                organization: document.getElementById("org").value,
-                email: document.getElementById("email").value,
-                interest: document.getElementById("interest").value,
-                message: document.getElementById("message").value
-            };
+if (!result.success) {
+  throw new Error(result.error || "Unknown error");
+}
 
-            // Reset status
-            status.classList.remove('visible', 'error');
-            status.textContent = '';
+    if (result.success) {
+      form.reset();
 
-            try {
-                const response = await fetch("/api/contact", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(payload)
-                });
+      status.classList.add("visible");
+      status.innerHTML =
+        "Thank you. Your message has been sent successfully.";
+    } 
 
-                const result = await response.json();
+  } catch (err) {
+  console.error(err);
 
-                if (!response.ok || !result.success) {
-                    throw new Error(result.error || "Something went wrong. Please try again.");
-                }
-
-                // Success
-                form.reset();
-                status.classList.add('visible');
-                status.textContent = "✅ Thank you. Your message has been sent successfully.";
-
-            } catch (err) {
-                console.error(err);
-                status.classList.add('visible', 'error');
-                status.textContent = `❌ ${err.message}`;
-            }
-        });
-    </script>
-
+  status.classList.add("visible");
+  status.textContent = err.message;
+}
+});
+</script>
+  
+<script src="main.js"></script>
 </body>
 </html>
